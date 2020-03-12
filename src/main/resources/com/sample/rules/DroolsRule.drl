@@ -1,0 +1,22 @@
+//created on: 10-mar-2020
+package com.example
+
+import com.sample.DroolsClass.Message;
+
+
+rule "Hello World"
+    when
+        m : Message( status == Message.HELLO, myMessage : message )
+    then
+        System.out.println( myMessage );
+        m.setMessage( "Goodbye cruel world" );
+        m.setStatus( Message.GOODBYE );
+        update( m );
+end
+ 
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
